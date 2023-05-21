@@ -1,0 +1,10 @@
+{
+  "resourceName": "mosaic",
+  "tableName": "mosaic",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

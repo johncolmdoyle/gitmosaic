@@ -1,0 +1,40 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-gitmosaic-dev-220946-authRole",
+      "UnauthRoleArn": "arn:aws:iam::774395970952:role/amplify-gitmosaic-dev-220946-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::774395970952:role/amplify-gitmosaic-dev-220946-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
+      "UnauthRoleName": "amplify-gitmosaic-dev-220946-unauthRole",
+      "StackName": "amplify-gitmosaic-dev-220946",
+      "StackId": "arn:aws:cloudformation:us-east-1:774395970952:stack/amplify-gitmosaic-dev-220946/65c3e7f0-f6b3-11ed-bde3-0e18ddc4064f",
+      "AmplifyAppId": "dvc5d7ir6jbek"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dvc5d7ir6jbek",
+          "type": "manual"
+        }
+      },
+      "function": {
+        "userLambda": {
+          "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
+          "s3Key": "amplify-builds/userLambda-4a653832304750597544-build.zip"
+        },
+        "mosaicLambda": {
+          "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
+          "s3Key": "amplify-builds/mosaicLambda-4173636565396a4c374b-build.zip"
+        }
+      },
+      "api": {
+        "api": {}
+      },
+      "storage": {
+        "userTable": {},
+        "mosaic": {}
+      }
+    }
+  }
+}

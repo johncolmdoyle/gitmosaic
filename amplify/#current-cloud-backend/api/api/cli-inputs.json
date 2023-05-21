@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/user": {
+      "name": "/user",
+      "lambdaFunction": "userLambda",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/mosaic": {
+      "name": "/mosaic",
+      "lambdaFunction": "mosaicLambda",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
