@@ -32,19 +32,35 @@
             "Name",
             "Arn"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "commitLambda",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "imageLambda",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
         }
       ],
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/api/api-cloudformation-template.json",
         "logicalId": "apiapi"
       },
-      "lastPushTimeStamp": "2023-05-21T14:50:40.781Z",
+      "lastPushTimeStamp": "2023-05-23T22:53:20.394Z",
       "output": {
         "ApiName": "api",
         "RootUrl": "https://htz6emubsb.execute-api.us-east-1.amazonaws.com/dev",
         "ApiId": "htz6emubsb"
       },
-      "lastPushDirHash": "iAX6ox4OjsBRStaIyJeXlGx26gY="
+      "lastPushDirHash": "2ALHGEl4zBYGQFw69NKglR0eqDk="
     }
   },
   "hosting": {
@@ -56,7 +72,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
         "logicalId": "hostingamplifyhosting"
       },
-      "lastPushTimeStamp": "2023-05-21T14:50:40.369Z",
+      "lastPushTimeStamp": "2023-05-23T22:53:20.398Z",
       "output": {},
       "lastPushDirHash": "sPC12UPfZyAd9rAy/XJK5XuwCLU="
     }
@@ -69,7 +85,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/storage/userTable-cloudformation-template.json",
         "logicalId": "storageuserTable"
       },
-      "lastPushTimeStamp": "2023-05-21T14:50:40.781Z",
+      "lastPushTimeStamp": "2023-05-23T22:53:20.399Z",
       "output": {
         "PartitionKeyName": "id",
         "Region": "us-east-1",
@@ -87,7 +103,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/storage/mosaic-cloudformation-template.json",
         "logicalId": "storagemosaic"
       },
-      "lastPushTimeStamp": "2023-05-21T14:50:40.781Z",
+      "lastPushTimeStamp": "2023-05-23T22:53:20.402Z",
       "output": {
         "PartitionKeyName": "id",
         "Region": "us-east-1",
@@ -97,6 +113,46 @@
         "Name": "mosaic-dev"
       },
       "lastPushDirHash": "ufXWcp6g66lpeWayUidugREppno="
+    },
+    "commitTable": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/storage/commitTable-cloudformation-template.json",
+        "logicalId": "storagecommitTable"
+      },
+      "lastPushTimeStamp": "2023-05-23T22:53:20.406Z",
+      "output": {
+        "PartitionKeyName": "id",
+        "SortKeyName": "insertTimestamp",
+        "SortKeyType": "N",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:dynamodb:us-east-1:774395970952:table/commit-dev",
+        "StreamArn": "arn:aws:dynamodb:us-east-1:774395970952:table/commit-dev/stream/2023-05-21T19:35:00.662",
+        "PartitionKeyType": "S",
+        "Name": "commit-dev"
+      },
+      "lastPushDirHash": "oaporfAKTHTV2NoEAywlVf7mevE="
+    },
+    "imageTable": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/storage/imageTable-cloudformation-template.json",
+        "logicalId": "storageimageTable"
+      },
+      "lastPushTimeStamp": "2023-05-23T22:53:20.409Z",
+      "output": {
+        "PartitionKeyName": "id",
+        "SortKeyName": "index",
+        "SortKeyType": "N",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:dynamodb:us-east-1:774395970952:table/image-dev",
+        "StreamArn": "arn:aws:dynamodb:us-east-1:774395970952:table/image-dev/stream/2023-05-23T03:29:50.051",
+        "PartitionKeyType": "S",
+        "Name": "image-dev"
+      },
+      "lastPushDirHash": "vmL+M9qoLPuLf1vb77xUh9Vz/Ag="
     }
   },
   "function": {
@@ -118,19 +174,19 @@
           }
         }
       ],
-      "lastBuildTimeStamp": "2023-05-21T14:48:32.263Z",
+      "lastBuildTimeStamp": "2023-05-23T03:29:31.683Z",
       "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2023-05-21T14:48:33.303Z",
-      "distZipFilename": "userLambda-4a653832304750597544-build.zip",
+      "lastPackageTimeStamp": "2023-05-23T03:29:33.851Z",
+      "distZipFilename": "userLambda-4948772b41556e443466-build.zip",
       "s3Bucket": {
         "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
-        "s3Key": "amplify-builds/userLambda-4a653832304750597544-build.zip"
+        "s3Key": "amplify-builds/userLambda-4948772b41556e443466-build.zip"
       },
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/function/userLambda-cloudformation-template.json",
         "logicalId": "functionuserLambda"
       },
-      "lastPushTimeStamp": "2023-05-21T14:50:40.781Z",
+      "lastPushTimeStamp": "2023-05-23T22:53:20.412Z",
       "output": {
         "LambdaExecutionRoleArn": "arn:aws:iam::774395970952:role/gitmosaicLambdaRole60ac5416-dev",
         "Region": "us-east-1",
@@ -138,7 +194,7 @@
         "Name": "userLambda-dev",
         "LambdaExecutionRole": "gitmosaicLambdaRole60ac5416-dev"
       },
-      "lastPushDirHash": "XBBJNTcOa7eFKOIkDP7IqHlXG3Q="
+      "lastPushDirHash": "wz4AZwtCdAwebWDU2vXUoKtmnCg="
     },
     "mosaicLambda": {
       "build": true,
@@ -170,7 +226,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/function/mosaicLambda-cloudformation-template.json",
         "logicalId": "functionmosaicLambda"
       },
-      "lastPushTimeStamp": "2023-05-21T14:50:40.781Z",
+      "lastPushTimeStamp": "2023-05-23T22:53:20.416Z",
       "output": {
         "LambdaExecutionRoleArn": "arn:aws:iam::774395970952:role/gitmosaicLambdaRolea1fa8765-dev",
         "Region": "us-east-1",
@@ -179,6 +235,126 @@
         "LambdaExecutionRole": "gitmosaicLambdaRolea1fa8765-dev"
       },
       "lastPushDirHash": "sB4274mIAv1X7Z+0zZBY96Kh8qE="
+    },
+    "commitLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "commitTable",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ],
+      "lastBuildTimeStamp": "2023-05-21T23:15:23.959Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2023-05-21T23:15:24.543Z",
+      "distZipFilename": "commitLambda-62682f5a365232785033-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
+        "s3Key": "amplify-builds/commitLambda-62682f5a365232785033-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/function/commitLambda-cloudformation-template.json",
+        "logicalId": "functioncommitLambda"
+      },
+      "lastPushTimeStamp": "2023-05-23T22:53:20.418Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::774395970952:role/gitmosaicLambdaRolecb60c140-dev",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:774395970952:function:commitLambda-dev",
+        "Name": "commitLambda-dev",
+        "LambdaExecutionRole": "gitmosaicLambdaRolecb60c140-dev"
+      },
+      "lastPushDirHash": "m9rCtVktfGsvVuAEuB4/+WAh2uI="
+    },
+    "imageLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "imageTable",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ],
+      "lastBuildTimeStamp": "2023-05-23T19:48:10.190Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2023-05-23T19:48:14.698Z",
+      "distZipFilename": "imageLambda-7973467078426b5a7270-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
+        "s3Key": "amplify-builds/imageLambda-7973467078426b5a7270-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/function/imageLambda-cloudformation-template.json",
+        "logicalId": "functionimageLambda"
+      },
+      "lastPushTimeStamp": "2023-05-23T22:53:20.421Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::774395970952:role/gitmosaicLambdaRolecf34835c-dev",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:774395970952:function:imageLambda-dev",
+        "Name": "imageLambda-dev",
+        "LambdaExecutionRole": "gitmosaicLambdaRolecf34835c-dev"
+      },
+      "lastPushDirHash": "y0NJeFO/s2vqkvlyJmWXi6JABOw="
+    },
+    "imageSplitLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "imageTable",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ],
+      "lastBuildTimeStamp": "2023-05-23T22:50:34.064Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2023-05-23T22:50:38.088Z",
+      "distZipFilename": "imageSplitLambda-5531646a795767787770-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
+        "s3Key": "amplify-builds/imageSplitLambda-5531646a795767787770-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/function/imageSplitLambda-cloudformation-template.json",
+        "logicalId": "functionimageSplitLambda"
+      },
+      "lastPushTimeStamp": "2023-05-23T22:53:20.774Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::774395970952:role/gitmosaicLambdaRoled160abd6-dev",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:774395970952:function:imageSplitLambda-dev",
+        "Name": "imageSplitLambda-dev",
+        "LambdaExecutionRole": "gitmosaicLambdaRoled160abd6-dev"
+      },
+      "lastPushDirHash": "4HOEMwVSZtpZoCWcRouKhWRtGVg="
     }
   }
 }

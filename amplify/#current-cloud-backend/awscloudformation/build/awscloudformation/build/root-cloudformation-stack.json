@@ -181,6 +181,30 @@
               "Outputs.Arn"
             ]
           },
+          "functioncommitLambdaName": {
+            "Fn::GetAtt": [
+              "functioncommitLambda",
+              "Outputs.Name"
+            ]
+          },
+          "functioncommitLambdaArn": {
+            "Fn::GetAtt": [
+              "functioncommitLambda",
+              "Outputs.Arn"
+            ]
+          },
+          "functionimageLambdaName": {
+            "Fn::GetAtt": [
+              "functionimageLambda",
+              "Outputs.Name"
+            ]
+          },
+          "functionimageLambdaArn": {
+            "Fn::GetAtt": [
+              "functionimageLambda",
+              "Outputs.Arn"
+            ]
+          },
           "env": "dev"
         }
       }
@@ -220,13 +244,41 @@
         }
       }
     },
+    "storagecommitTable": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/storage/commitTable-cloudformation-template.json",
+        "Parameters": {
+          "tableName": "commit",
+          "partitionKeyName": "id",
+          "partitionKeyType": "S",
+          "sortKeyName": "insertTimestamp",
+          "sortKeyType": "N",
+          "env": "dev"
+        }
+      }
+    },
+    "storageimageTable": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/storage/imageTable-cloudformation-template.json",
+        "Parameters": {
+          "tableName": "image",
+          "partitionKeyName": "id",
+          "partitionKeyType": "S",
+          "sortKeyName": "index",
+          "sortKeyType": "N",
+          "env": "dev"
+        }
+      }
+    },
     "functionuserLambda": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
         "TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/function/userLambda-cloudformation-template.json",
         "Parameters": {
           "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
-          "s3Key": "amplify-builds/userLambda-4a653832304750597544-build.zip",
+          "s3Key": "amplify-builds/userLambda-4948772b41556e443466-build.zip",
           "storageuserTableName": {
             "Fn::GetAtt": [
               "storageuserTable",
@@ -259,6 +311,75 @@
           "storagemosaicArn": {
             "Fn::GetAtt": [
               "storagemosaic",
+              "Outputs.Arn"
+            ]
+          },
+          "env": "dev"
+        }
+      }
+    },
+    "functioncommitLambda": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/function/commitLambda-cloudformation-template.json",
+        "Parameters": {
+          "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
+          "s3Key": "amplify-builds/commitLambda-62682f5a365232785033-build.zip",
+          "storagecommitTableName": {
+            "Fn::GetAtt": [
+              "storagecommitTable",
+              "Outputs.Name"
+            ]
+          },
+          "storagecommitTableArn": {
+            "Fn::GetAtt": [
+              "storagecommitTable",
+              "Outputs.Arn"
+            ]
+          },
+          "env": "dev"
+        }
+      }
+    },
+    "functionimageLambda": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/function/imageLambda-cloudformation-template.json",
+        "Parameters": {
+          "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
+          "s3Key": "amplify-builds/imageLambda-7973467078426b5a7270-build.zip",
+          "storageimageTableName": {
+            "Fn::GetAtt": [
+              "storageimageTable",
+              "Outputs.Name"
+            ]
+          },
+          "storageimageTableArn": {
+            "Fn::GetAtt": [
+              "storageimageTable",
+              "Outputs.Arn"
+            ]
+          },
+          "env": "dev"
+        }
+      }
+    },
+    "functionimageSplitLambda": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-gitmosaic-dev-220946-deployment/amplify-cfn-templates/function/imageSplitLambda-cloudformation-template.json",
+        "Parameters": {
+          "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
+          "s3Key": "amplify-builds/imageSplitLambda-5531646a795767787770-build.zip",
+          "storageimageTableName": {
+            "Fn::GetAtt": [
+              "storageimageTable",
+              "Outputs.Name"
+            ]
+          },
+          "storageimageTableArn": {
+            "Fn::GetAtt": [
+              "storageimageTable",
               "Outputs.Arn"
             ]
           },

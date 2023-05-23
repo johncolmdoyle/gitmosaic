@@ -17,6 +17,22 @@
           ],
           "category": "function",
           "resourceName": "mosaicLambda"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "commitLambda"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "imageLambda"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -24,6 +40,63 @@
     }
   },
   "function": {
+    "commitLambda": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "commitTable"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "imageLambda": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "imageTable"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "imageSplitLambda": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "imageTable"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "mosaicLambda": {
       "build": true,
       "dependsOn": [
@@ -71,6 +144,54 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_commitLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "commitLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_commitLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "commitLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_imageLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "imageLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_imageLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "imageLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_imageSplitLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "imageSplitLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_imageSplitLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "imageSplitLambda"
+        }
+      ]
+    },
     "AMPLIFY_function_mosaicLambda_deploymentBucketName": {
       "usedBy": [
         {
@@ -121,6 +242,14 @@
     }
   },
   "storage": {
+    "commitTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "imageTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
     "mosaic": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"

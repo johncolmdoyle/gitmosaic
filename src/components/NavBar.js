@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { API } from 'aws-amplify'
@@ -23,40 +23,51 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isUserCreated, setIsUserCreated] = useState(false);
   const {
     user,
     isAuthenticated,
     loginWithRedirect,
     logout,
+    getAccessTokenSilently
   } = useAuth0();
   const toggle = () => setIsOpen(!isOpen);
 
   const logoutWithRedirect = () =>
     logout({
-        logoutParams: {
-          returnTo: window.location.origin,
-        }
+      logoutParams: {
+        returnTo: window.location.origin,
+      }
     });
 
-  async function updateUser() {
-    if(isAuthenticated) {
-      const apiName = 'api';
-      const path = '/user';
+  useEffect(() => {
+    const updateUser = async () => {
+      try {
+        const accessToken = await getAccessTokenSilently();
+
+        const apiName = 'api';
+        const path = '/user';
         const myInit = {
-            body: {id: user.sub, user: user},
-            headers: {
-              Authorization: "Test"
-            } 
+          body: { id: user.sub, user: user },
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          }
         };
 
         try {
-            await API.post(apiName, path, myInit);
+          await API.post(apiName, path, myInit);
+          setIsUserCreated(true)
         } catch (err) { console.log('error creating user', err) }
-    }  
-  }
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
 
-  updateUser();
-  
+    if (!isUserCreated) {
+      updateUser();
+    }
+  }, [getAccessTokenSilently, user?.sub, user, isUserCreated]);
+
   return (
     <div className="nav-container">
       <Navbar color="light" light expand="md">

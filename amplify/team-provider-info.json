@@ -21,11 +21,23 @@
       "function": {
         "userLambda": {
           "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
-          "s3Key": "amplify-builds/userLambda-4a653832304750597544-build.zip"
+          "s3Key": "amplify-builds/userLambda-4948772b41556e443466-build.zip"
         },
         "mosaicLambda": {
           "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
           "s3Key": "amplify-builds/mosaicLambda-4173636565396a4c374b-build.zip"
+        },
+        "commitLambda": {
+          "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
+          "s3Key": "amplify-builds/commitLambda-62682f5a365232785033-build.zip"
+        },
+        "imageLambda": {
+          "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
+          "s3Key": "amplify-builds/imageLambda-7973467078426b5a7270-build.zip"
+        },
+        "imageSplitLambda": {
+          "deploymentBucketName": "amplify-gitmosaic-dev-220946-deployment",
+          "s3Key": "amplify-builds/imageSplitLambda-5531646a795767787770-build.zip"
         }
       },
       "api": {
@@ -33,7 +45,9 @@
       },
       "storage": {
         "userTable": {},
-        "mosaic": {}
+        "mosaic": {},
+        "commitTable": {},
+        "imageTable": {}
       }
     }
   }

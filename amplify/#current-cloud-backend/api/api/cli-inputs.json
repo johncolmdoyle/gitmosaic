@@ -14,6 +14,20 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/commit": {
+      "name": "/commit",
+      "lambdaFunction": "commitLambda",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/image": {
+      "name": "/image",
+      "lambdaFunction": "imageLambda",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

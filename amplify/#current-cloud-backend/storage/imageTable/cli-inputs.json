@@ -1,0 +1,14 @@
+{
+  "resourceName": "imageTable",
+  "tableName": "image",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "index",
+    "fieldType": "number"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

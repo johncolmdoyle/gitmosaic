@@ -1,0 +1,7 @@
+{
+  "tableName": "image",
+  "partitionKeyName": "id",
+  "partitionKeyType": "S",
+  "sortKeyName": "index",
+  "sortKeyType": "N"
+}

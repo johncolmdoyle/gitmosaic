@@ -1,0 +1,7 @@
+{
+  "tableName": "commit",
+  "partitionKeyName": "id",
+  "partitionKeyType": "S",
+  "sortKeyName": "insertTimestamp",
+  "sortKeyType": "N"
+}

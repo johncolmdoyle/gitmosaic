@@ -7,7 +7,9 @@ See the License for the specific language governing permissions and limitations 
 */
 
 
-
+const jwt = require('jsonwebtoken');
+const jwksClient = require('jwks-rsa');
+const { v4: uuidv4 } = require('uuid');
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 const { DeleteCommand, DynamoDBDocumentClient, GetCommand, PutCommand, QueryCommand,  } = require('@aws-sdk/lib-dynamodb');
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
@@ -90,51 +92,6 @@ app.get(path + hashKeyPath, async function(req, res) {
   }
 });
 
-/*****************************************
- * HTTP Get method for get single object *
- *****************************************/
-
-app.get(path + '/object' + hashKeyPath + sortKeyPath, async function(req, res) {
-  const params = {};
-  if (userIdPresent && req.apiGateway) {
-    params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  } else {
-    params[partitionKeyName] = req.params[partitionKeyName];
-    try {
-      params[partitionKeyName] = convertUrlType(req.params[partitionKeyName], partitionKeyType);
-    } catch(err) {
-      res.statusCode = 500;
-      res.json({error: 'Wrong column type ' + err});
-    }
-  }
-  if (hasSortKey) {
-    try {
-      params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
-    } catch(err) {
-      res.statusCode = 500;
-      res.json({error: 'Wrong column type ' + err});
-    }
-  }
-
-  let getItemParams = {
-    TableName: tableName,
-    Key: params
-  }
-
-  try {
-    const data = await ddbDocClient.send(new GetCommand(getItemParams));
-    if (data.Item) {
-      res.json(data.Item);
-    } else {
-      res.json(data) ;
-    }
-  } catch (err) {
-    res.statusCode = 500;
-    res.json({error: 'Could not load items: ' + err.message});
-  }
-});
-
-
 /************************************
 * HTTP put method for insert object *
 *************************************/
@@ -168,57 +125,38 @@ app.post(path, async function(req, res) {
     req.body['userId'] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
   }
 
-  let putItemParams = {
-    TableName: tableName,
-    Item: req.body
-  }
-  try {
-    let data = await ddbDocClient.send(new PutCommand(putItemParams));
-    res.json({ success: 'post call succeed!', url: req.url, data: data })
-  } catch (err) {
-    res.statusCode = 500;
-    res.json({ error: err, url: req.url, body: req.body });
-  }
-});
+  req.body[partitionKeyName] = uuidv4();
 
-/**************************************
-* HTTP remove method to delete object *
-***************************************/
+  var client = jwksClient({
+    jwksUri: 'https://gitmosaic.us.auth0.com/.well-known/jwks.json'
+  });
 
-app.delete(path + '/object' + hashKeyPath + sortKeyPath, async function(req, res) {
-  const params = {};
-  if (userIdPresent && req.apiGateway) {
-    params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  } else {
-    params[partitionKeyName] = req.params[partitionKeyName];
-     try {
-      params[partitionKeyName] = convertUrlType(req.params[partitionKeyName], partitionKeyType);
-    } catch(err) {
+  function getKey(header, callback){
+    client.getSigningKey(header.kid, function(err, key) {
+      var signingKey = key.publicKey || key.rsaPublicKey;
+      callback(null, signingKey);
+    });
+  }
+  
+  jwt.verify(token, getKey, options, async function(err, decoded) {
+    if (err) {
+      console.log("Error: ", err)
       res.statusCode = 500;
-      res.json({error: 'Wrong column type ' + err});
+      res.json({ error: err, url: req.url, body: req.body });
     }
-  }
-  if (hasSortKey) {
+    
+    let putItemParams = {
+      TableName: tableName,
+      Item: req.body
+    }
     try {
-      params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
-    } catch(err) {
+      let data = await ddbDocClient.send(new PutCommand(putItemParams));
+      res.json({ success: 'post call succeed!', url: req.url, data: data })
+    } catch (err) {
       res.statusCode = 500;
-      res.json({error: 'Wrong column type ' + err});
+      res.json({ error: err, url: req.url, body: req.body });
     }
-  }
-
-  let removeItemParams = {
-    TableName: tableName,
-    Key: params
-  }
-
-  try {
-    let data = await ddbDocClient.send(new DeleteCommand(removeItemParams));
-    res.json({url: req.url, data: data});
-  } catch (err) {
-    res.statusCode = 500;
-    res.json({error: err, url: req.url});
-  }
+  });
 });
 
 app.listen(3000, function() {

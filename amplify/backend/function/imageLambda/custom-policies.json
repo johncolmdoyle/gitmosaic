@@ -1,0 +1,6 @@
+[
+  {
+    "Action": ["sqs:*"],
+    "Resource": ["arn:aws:sqs:us-east-1:774395970952:imageSplit"]
+  }
+]

@@ -19,6 +19,14 @@ const awsmobile = {
         {
             "tableName": "mosaic-dev",
             "region": "us-east-1"
+        },
+        {
+            "tableName": "commit-dev",
+            "region": "us-east-1"
+        },
+        {
+            "tableName": "image-dev",
+            "region": "us-east-1"
         }
     ]
 };

@@ -1,0 +1,26 @@
+{
+  "resourceName": "commitTable",
+  "tableName": "commit",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "insertTimestamp",
+    "fieldType": "number"
+  },
+  "gsi": [
+    {
+      "name": "latestCommits",
+      "partitionKey": {
+        "fieldName": "insertTimestamp",
+        "fieldType": "number"
+      },
+      "sortKey": {
+        "fieldName": "id",
+        "fieldType": "string"
+      }
+    }
+  ],
+  "triggerFunctions": []
+}

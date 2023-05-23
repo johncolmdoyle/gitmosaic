@@ -1,0 +1,10 @@
+[
+  {
+    "Action": ["sqs:*"],
+    "Resource": ["arn:aws:sqs:us-east-1:774395970952:imageSplit"]
+  },
+  {
+    "Action": ["s3:*"],
+    "Resource": ["arn:aws:s3:::gitmosaic-user-profiles","arn:aws:s3:::gitmosaic-user-profiles/*"]
+  }
+]
